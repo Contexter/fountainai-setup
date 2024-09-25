@@ -192,8 +192,9 @@ Once you have completed these steps and authenticated with GitHub CLI, you can r
 This ensures that **only authenticated users** can create and configure the repository.
 
 > an important insert here:
-> the `setup_repository.sh` doesn't automatically push the locally created repo to its github hosted remote - this must be done **manually** , which is kind of an unintended consequential - so, `cd` into the locally create rep , then `git status` etc ... commit,  again *manually*.
-> Even if this wasn't the intended behavior - it makes perfectly sense here. 
+> the `setup_repository.sh` doesn't automatically push the locally created repo to its github hosted remote - this must be done **manually** , which is kind of an unintended consequential here - so, `cd` into the locally create repo , then `git status` etc , commit, as said, *manually*.
+> Even if this wasn't the intended behavior (we wanted to push using `gh`but received "fatal: invalid refspec 'refs/heads/'
+failed to run git: exit status 128" errors)  - it makes perfectly sense here. 
 
 ---
 
