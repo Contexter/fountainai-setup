@@ -1,0 +1,14 @@
+name: Kong Configuration
+
+on:
+  workflow_dispatch:
+
+jobs:
+  configure-kong:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run Kong configuration script
+      run: ./scripts/configure_kong.sh

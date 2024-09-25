@@ -1,0 +1,14 @@
+name: Docker Configuration
+
+on:
+  workflow_dispatch:
+
+jobs:
+  configure-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run Docker configuration script
+      run: ./scripts/configure_docker.sh

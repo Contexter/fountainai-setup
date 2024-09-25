@@ -1,0 +1,14 @@
+name: OpenSearch Configuration
+
+on:
+  workflow_dispatch:
+
+jobs:
+  configure-opensearch:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run OpenSearch configuration script
+      run: ./scripts/configure_opensearch.sh

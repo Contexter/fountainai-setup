@@ -1,0 +1,9 @@
+# Ignore sensitive files
+.env
+*.secret
+*.key
+
+# Ignore generated files
+*.log
+*.bak
+*.backup
