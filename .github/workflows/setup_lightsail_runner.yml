@@ -1,6 +1,5 @@
 name: Setup Lightsail Runner
 
-# Allows the action to be triggered manually via the GitHub UI
 on:
   workflow_dispatch:
 
@@ -16,21 +15,21 @@ jobs:
       - name: Set up GitHub CLI
         uses: actions/setup-gh@v1
 
+      - name: Run GitHub Secrets Setup Script
+        run: |
+          chmod +x ./scripts/infrastructure/setup_github_secrets.sh
+          ./scripts/infrastructure/setup_github_secrets.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub authentication
+
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-cli@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-central-1  # Ensure this matches your region
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Run Lightsail-Runner Setup
+      - name: Run Lightsail-Runner Setup Script
         run: |
-          chmod +x ./scripts/setup_lightsail_runner.sh
-          ./scripts/setup_lightsail_runner.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          AWS_REGION: eu-central-1
-          AVAILABILITY_ZONE: eu-central-1a
-          BLUEPRINT_ID: ubuntu_20_04
-          BUNDLE_ID: nano_2_0
-          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
+          chmod +x ./scripts/infrastructure/setup_lightsail_runner.sh
+          ./scripts/infrastructure/setup_lightsail_runner.sh
