@@ -1,0 +1,28 @@
+name: Setup Lightsail Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-lightsail-runner:
+    name: Setup Lightsail-Runner Instance
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up GitHub CLI
+        uses: actions/setup-gh@v1
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-cli@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+
+      - name: Run Lightsail-Runner Setup Script
+        run: |
+          chmod +x ./scripts/infrastructure/setup_lightsail_runner.sh
+          ./scripts/infrastructure/setup_lightsail_runner.sh
