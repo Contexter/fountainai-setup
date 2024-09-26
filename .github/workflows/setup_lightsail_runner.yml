@@ -1,5 +1,6 @@
 name: Setup Lightsail Runner
 
+# Allows the action to be triggered manually via the GitHub UI
 on:
   workflow_dispatch:
 
@@ -20,9 +21,16 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-central-1
+          aws-region: eu-central-1  # Ensure this matches your region
 
-      - name: Run Lightsail-Runner Setup Script
+      - name: Run Lightsail-Runner Setup
         run: |
-          chmod +x ./scripts/infrastructure/setup_lightsail_runner.sh
-          ./scripts/infrastructure/setup_lightsail_runner.sh
+          chmod +x ./scripts/setup_lightsail_runner.sh
+          ./scripts/setup_lightsail_runner.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AWS_REGION: eu-central-1
+          AVAILABILITY_ZONE: eu-central-1a
+          BLUEPRINT_ID: ubuntu_20_04
+          BUNDLE_ID: nano_2_0
+          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
